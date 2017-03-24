@@ -28,7 +28,7 @@ Add the notifier to the assets:
 ## Usage
 Notification can now be called either form the client (JS) or the server (ruby)
 
-# First configure and mounte actioncable as per your needs.
+### First configure and mounte actioncable as per your needs.
 
 # Invoking the notification from the client:
 
@@ -67,7 +67,7 @@ Notification can now be called either form the client (JS) or the server (ruby)
   ActionCable.server.broadcast('notifications', { message: "Notification from the console !!!" })
   ```
 
-  # NOTE for the above implementation to work we need to configure ActionCable to use redis adapter.
+  #### NOTE for the above implementation to work we need to configure ActionCable to use redis adapter.
 
   Please refer available methods that you can pass as a notification
 
