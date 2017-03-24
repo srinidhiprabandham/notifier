@@ -70,11 +70,13 @@ Notification can now be called either form the client (JS) or the server (ruby)
 
 # The notification Object
 
+```ruby
 {
   message: "This actual body of you notification",
   css: "A separated list of classes that will be applied on the notification"
   onClick: "Takes a function that will be executed when you click the notification" (Defaults to close the notification)
 }
+```
 
 ## Contributing
 1. Fork the project.
