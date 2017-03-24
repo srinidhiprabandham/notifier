@@ -1,3 +1,5 @@
+# This defines the channel that will handle subscription
+# and responsibility to broadcast over to all clients.
 module Notifier
   class NotifierChannel < ActionCable::Channel::Base
     def subscribed
