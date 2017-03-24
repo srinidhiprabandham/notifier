@@ -46,7 +46,7 @@ Notification can now be called either form the client (JS) or the server (ruby)
       queue: 'my-long-running-job'
 
       before_enqueue do |job|
-        ActionCable.server.broadcast('notifications', data: { data: { message: "Started Job #{job.class.class_name}", css: 'text-info' } })
+        ActionCable.server.broadcast('notifications', { message: "Started Job #{job.class.class_name}", css: 'text-info' })
       end
 
       def perform
@@ -54,10 +54,27 @@ Notification can now be called either form the client (JS) or the server (ruby)
       end
 
       def after_perform do |job|
-        ActionCalble.server.broadcast('notifications', data: { data: { message: "Job #{job.class.class_name} completed !", css: 'text-success' } })
+        ActionCalble.server.broadcast('notifications', { message: "Job #{job.class.class_name} completed !", css: 'text-success' })
       end
     end
   ```
+
+  or
+
+  ```bash
+  rails c
+  ActionCable.server.broadcast('notifications', { message: "Notification from the console !!!" })
+  ```
+
+  Please refer available methods that you can pass as a notification
+
+# The notification Object
+
+{
+  message: "This actual body of you notification",
+  css: "A separated list of classes that will be applied on the notification"
+  onClick: "Takes a function that will be executed when you click the notification" (Defaults to close the notification)
+}
 
 ## Contributing
 1. Fork the project.
