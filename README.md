@@ -62,7 +62,8 @@ Notification can now be called either form the client (JS) or the server (ruby)
 ## Contributing
 1. Fork the project.
 2. git checkout -b my-awesome-tweak
-3. Submit Pull request.
+3. Add tests that support your changes.
+4. Submit Pull request.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

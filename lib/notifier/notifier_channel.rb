@@ -6,8 +6,8 @@ module Notifier
       stream_from 'notifications'
     end
 
-    def notify(data = {})
-      ActionCable.server.broadcast('notifications', data: data)
+    def notify(&block)
+      ActionCable.server.broadcast('notifications', &block)
     end
   end
 end
