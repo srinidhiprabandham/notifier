@@ -1,6 +1,8 @@
 //= require action_cable
+//= require_tree .
 
 this.App = {};
+this.Notifier = {};
 
 
 App.cable = ActionCable.createConsumer();
@@ -10,11 +12,14 @@ App.cable = ActionCable.createConsumer();
 App.notifier = App.cable.subscriptions.create('Notifier::NotifierChannel', {  
   // Called when a data comes in.
   received: function(data) {
-    console.log("testslaskdjfalskd");
     var info = data;
     // NOTE info is an object which has to have a key
     // called message !!!
-    console.log(info);
+    content = "<div class='note'>";
+    content += data.message;
+    content += "</div>"
+    
+    document.body.innerHTML += content
   },
 
   // The function that will be responsible to send out notifications
@@ -30,3 +35,9 @@ App.notifier = App.cable.subscriptions.create('Notifier::NotifierChannel', {
     this.perform('notify', formated_data)
   }
 });
+
+
+// Convenience method that unifies call to broadcast b/w Server and Client
+Notifier.notify = function(data) {
+  return App.notifier.notify(data);
+};

@@ -28,14 +28,14 @@ Add the notifier to the assets:
 ## Usage
 Notification can now be called either form the client (JS) or the server (ruby)
 
-### First configure and mounte actioncable as per your needs.
+### First configure and mount actioncable as per your needs.
 
 # Invoking the notification from the client:
 
   > In any of your js files
   ```javascript
     $("#payment").on('click', function() {
-      App.notifier.notify({message: "Payment Button Clicked !!", css: 'text-danger'})
+      Notifier.notify({message: "Payment Button Clicked !!", css: 'text-danger'})
     });
   ```
 # Invoking the notification from the server:
@@ -48,7 +48,7 @@ Notification can now be called either form the client (JS) or the server (ruby)
       queue: 'my-long-running-job'
 
       before_enqueue do |job|
-        ActionCable.server.broadcast('notifications', { message: "Started Job #{job.class.class_name}", css: 'text-info' })
+        Notifier.notify({ message: "Started Job #{job.class.class_name}", css: 'text-info' })
       end
 
       def perform
@@ -56,7 +56,7 @@ Notification can now be called either form the client (JS) or the server (ruby)
       end
 
       def after_perform do |job|
-        ActionCalble.server.broadcast('notifications', { message: "Job #{job.class.class_name} completed !", css: 'text-success' })
+        Notifier.notify({ message: "Job #{job.class.class_name} completed !", css: 'text-success' })
       end
     end
   ```
@@ -64,7 +64,7 @@ Notification can now be called either form the client (JS) or the server (ruby)
 
   ```bash
   rails c
-  ActionCable.server.broadcast('notifications', { message: "Notification from the console !!!" })
+  Notifier.notify({ message: "Notification from the console !!!" })
   ```
 
   #### NOTE for the above implementation to work we need to configure ActionCable to use redis adapter.
