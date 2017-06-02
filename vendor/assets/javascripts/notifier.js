@@ -4,6 +4,11 @@
 
 this.App = {};
 this.Notifier = {};
+this.NotifierConfig = {
+  fadeOutAfter: 4000,
+  backgroundColor: "#FFFF",
+  textColor: "#0000",
+};
 
 
 App.cable = ActionCable.createConsumer();
@@ -16,7 +21,7 @@ App.notifier = App.cable.subscriptions.create('Notifier::NotifierChannel', {
     var info = data;
     // NOTE info is an object which has to have a key
     // called message !!!
-    content = "<div class='notifier-note'>";
+    content = "<div class='notifier-note' style=background-color:" + NotifierConfig.backgroundColor + ">";
       content += "<div class=" + data.css + ">";
         if(data.icon != undefined){
           content += "<div class=content-icon>";
@@ -24,7 +29,7 @@ App.notifier = App.cable.subscriptions.create('Notifier::NotifierChannel', {
           content += "</div>";
         }
         content += "<div class='content-body'>";
-            content += data.message;
+           content += "<div style=color:" + NotifierConfig.textColor + ">"  + data.message + "</b>";
         content += "</div>";
       content += "</div>";
     content += "</div>";
@@ -56,8 +61,10 @@ Notifier.notify = function(data) {
 // Should not be mutating jquery like this. But for now
 // can't think of any other solution.
 $(document).on('DOMNodeInserted', function(e) {
+  var delayDuration = NotifierConfig.fadeOutAfter || 4000;
+
   if ( $(e.target).hasClass('notifier-note') ) {
-    $(e.target).delay(4000).fadeOut('slow');
+    // $(e.target).delay(delayDuration).fadeOut('slow');
   }
 });
 
