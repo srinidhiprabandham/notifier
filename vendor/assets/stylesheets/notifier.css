@@ -19,36 +19,84 @@
 
 #page-wrap { width: 75%; margin: 80px auto; }
 
-.note {
+.notifier-note {
   position: relative;
-  z-index: 6001;
-  top: 25%;
-  left: 0;
-  right: 3%;
-  background: #fde073;
-  text-align: center;
-  line-height: 2.5;
-  overflow: hidden; 
-  height: 150px;
-  width: 300px;
+  margin: 1em;
+  background: #F9F9F9;
+  padding: 1em 1em 1em 2em;
+  min-width: 300px;
   float: right;
-  -webkit-box-shadow: 0 0 5px black;
-  -moz-box-shadow:    0 0 5px black;
-  box-shadow:         0 0 5px black;
+  clear: right;
+  border-left: 4px solid #DDD;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
+  animation-name: slideDown;
+  -webkit-animation-name: slideDown;	
+  animation-duration: 1s;	
+  -webkit-animation-duration: 1s;
+  animation-timing-function: ease;	
+  -webkit-animation-timing-function: ease;	
+  visibility: visible !important;
 }
 
-.cssanimations.csstransforms .note {
-  -webkit-transform: translateY(-50px);
-  -webkit-animation: slideDown 2.5s 1.0s 1 ease forwards;
-  -moz-transform:    translateY(-50px);
-  -moz-animation:    slideDown 2.5s 1.0s 1 ease forwards;
+
+.notifier-note:before {
+  position: absolute;
+  top: 50%;
+  margin-top: -5px;
+  left: -5px;
+  background-color: #DDD;
+  color: #FFF;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.content-body {
+  margin-left: 10px;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  50%{
+    transform: translateY(8%);
+  }
+  65%{
+    transform: translateY(-4%);
+  }
+  80%{
+    transform: translateY(4%);
+  }
+  95%{
+    transform: translateY(-2%);
+  }			
+  100% {
+    transform: translateY(0%);
+  }		
 }
 
 @-webkit-keyframes slideDown {
-  0%, 100% { -webkit-transform: translateY(-50px); }
-  10%, 90% { -webkit-transform: translateY(0px); }
-}
-@-moz-keyframes slideDown {
-  0%, 100% { -moz-transform: translateY(-50px); }
-  10%, 90% { -moz-transform: translateY(0px); }
+  0% {
+    -webkit-transform: translateY(-100%);
+  }
+  50%{
+    -webkit-transform: translateY(8%);
+  }
+  65%{
+    -webkit-transform: translateY(-4%);
+  }
+  80%{
+    -webkit-transform: translateY(4%);
+  }
+  95%{
+    -webkit-transform: translateY(-2%);
+  }			
+  100% {
+    -webkit-transform: translateY(0%);
+  }	
 }

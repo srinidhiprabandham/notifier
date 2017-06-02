@@ -1,3 +1,4 @@
+//= require jquery-3.2.1.min
 //= require action_cable
 //= require_tree .
 
@@ -15,11 +16,20 @@ App.notifier = App.cable.subscriptions.create('Notifier::NotifierChannel', {
     var info = data;
     // NOTE info is an object which has to have a key
     // called message !!!
-    content = "<div class='note'>";
-    content += data.message;
-    content += "</div>"
+    content = "<div class='notifier-note'>";
+      content += "<div class=" + data.css + ">";
+        if(data.icon != undefined){
+          content += "<div class=content-icon>";
+            content += "<i class=" + data.icon + "></i>";
+          content += "</div>";
+        }
+        content += "<div class='content-body'>";
+            content += data.message;
+        content += "</div>";
+      content += "</div>";
+    content += "</div>";
     
-    document.body.innerHTML += content
+   $("body").prepend(content);
   },
 
   // The function that will be responsible to send out notifications
@@ -41,3 +51,16 @@ App.notifier = App.cable.subscriptions.create('Notifier::NotifierChannel', {
 Notifier.notify = function(data) {
   return App.notifier.notify(data);
 };
+
+// hide note after 4 seconds by default.
+// Should not be mutating jquery like this. But for now
+// can't think of any other solution.
+$(document).on('DOMNodeInserted', function(e) {
+  if ( $(e.target).hasClass('notifier-note') ) {
+    $(e.target).delay(4000).fadeOut('slow');
+  }
+});
+
+$(document).on('click','.notifier-note', function() {
+  $(this).fadeOut('slow').remove();
+});
