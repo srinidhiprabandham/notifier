@@ -77,7 +77,18 @@ Notification can now be called either form the client (JS) or the server (ruby)
 {
   message: "This actual body of you notification",
   css: "A separated list of classes that will be applied on the notification"
-  onClick: "Takes a function that will be executed when you click the notification" (Defaults to close the notification)
+  icon: "Font awesome icon to show beside the content text"
+}
+```
+
+# Configuring the notifications.
+  > NotifierConfig is a javascript object with the following options
+
+```javascript
+NotifierConfig = {
+  fadeOutAfter: 4000, // Duration after which the notifications dissaper
+  backgroundColor: "#FFFF", // Background color
+  textColor: "#0000", //Text color of the notifications
 }
 ```
 
